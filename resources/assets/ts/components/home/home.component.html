@@ -1,0 +1,94 @@
+<div [hidden]="!isLoggedIn">
+  <div class="todo-header">
+    <h2>Teendők listája</h2>
+    <button (click)="newTask()" 
+      class="btn btn-default pull-left">
+        Új teendő
+    </button>
+    <div class="input-group">
+      <input type="text" class="form-control pull-left search-input"
+        placeholder="Search"
+        [(ngModel)]="searchValue"
+        id="txtSearch"/>
+      <div class="input-group-btn pull-left">
+        <button class="btn btn-primary"
+          type="button"
+          (click)="searchTask()">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"
+          [(ngModel)]="showFinished"
+          (change)="changeShow()">
+            Mutasd a kész feladatokat
+      </label>
+    </div>
+    <div class="list-group">
+      <div *ngFor="let task of tasksForm, let i = index"
+        href="#"
+        class="list-group-item list-group-item-action flex-column align-items-start">
+        <form method="post" 
+          [formGroup]="task"
+          (ngSubmit)="saveTask($event, i)">
+          <div *ngIf="!task.controls.edit.value"
+            class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">
+              <u>{{ task.controls.title.value }}</u>
+              <strong *ngIf="task.controls.is_finished.value"> - Kész!</strong>
+            </h5>
+            <small *ngIf="task.controls.days.value === 0">today</small>
+            <small *ngIf="task.controls.days.value > 0">{{ task.controls.days.value }} days ago</small>
+          </div>
+          <p *ngIf="!task.controls.edit.value" class="mb-1">{{ task.controls.description.value }}</p>
+          <div *ngIf="task.controls.edit.value">
+            <div>
+              <input type="text" class="dark-text" formControlName="title">
+            </div>
+            <div>
+              <textarea class="dark-text"
+                formControlName="description"
+                rows="3" cols="45"></textarea>
+            </div>
+            <input *ngIf="task.controls.id.value" type="file"
+              (change)="onSelectFile($event, i)">
+          </div>
+          <div class="btn-group">
+            <button
+              *ngIf="!task.controls.edit.value"
+              type="button"
+              class="btn card-button"
+              (click)="setTaskFinished(i)">
+                <p *ngIf="task.controls.is_finished.value">Nincs kész</p>
+                <p *ngIf="!task.controls.is_finished.value">Kész</p>
+            </button>
+            <button
+              *ngIf="!task.controls.edit.value"
+              type="button"
+              class="btn card-button"
+              (click)="task.controls.edit.value = !task.controls.edit.value">
+                Szerkesztés
+            </button>
+            <button
+              *ngIf="task.controls.edit.value"
+              type="submit"
+              class="btn card-button">
+                Mentés
+            </button>
+            <button
+              *ngIf="task.controls.edit.value"
+              type="button"
+              class="btn card-button"
+              (click)="task.controls.edit.value = !task.controls.edit.value">
+                Mégse
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

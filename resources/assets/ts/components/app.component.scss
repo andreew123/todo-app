@@ -1,0 +1,54 @@
+body {
+	font-family: "Raleway", sans-serif;
+    font-weight: normal;
+}
+
+.modal {
+    text-align: center;
+    display: block;
+
+    .modal-dialog {
+        margin-top: 6rem;
+        border-width: 0.1px;
+        border-style: solid;
+        border-color: #e3e3e3;
+    }
+}
+
+.search-input {
+    max-width: 80%;
+}
+
+.list-group-item {
+    margin-top: 1rem;
+    background-color: #F8F8F8
+}
+
+.card-button {
+    background: transparent;
+    border: 0;
+}
+
+.reg-button {
+    margin-top: 20px;
+}
+
+.dark-text {
+    color: black;
+}
+
+.todo-header {
+    margin-left: 15px;
+}
+
+.list-group {
+    max-width: 60%;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+[hidden] {
+    display: none;
+}

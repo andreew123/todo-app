@@ -1,0 +1,68 @@
+<div class="modal" id="signupModal" [hidden]="!visible">
+  <div class="modal-dialog">
+    <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          aria-hidden="true"
+          (click)="visible = !visible">
+            &times;
+        </button>
+        <h4 class="modal-title">Új felhasználói fiók létrehozása</h4>
+    </div>
+    <div class="modal-body">
+      <form method="post" 
+        [formGroup]="signupForm"
+        (ngSubmit)="onSubmit($event)"
+        name="login_form">
+        <div class="form-group">
+          <label for="lastnameInput">Vezetéknév</label>
+          <input type="text"
+            class="form-control"
+            id="lastnameInput"
+            formControlName="last_name"
+            placeholder="Teszt">
+        </div>
+        <div class="form-group">
+          <label for="firstnameInput">Keresztnév</label>
+          <input type="text"
+            class="form-control"
+            id="firstnameInput"
+            formControlName="first_name"
+            placeholder="Felhasználó">
+        </div>
+        <div class="form-group">
+          <label for="regEmailInput">Email cim</label>
+          <input type="email"
+            class="form-control"
+            id="regEmailInput"
+            formControlName="email"
+            placeholder="pelda@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="regPasswordInput">Jelszó</label>
+          <input type="password"
+            class="form-control"
+            id="regPasswordInput"
+            formControlName="password"
+            placeholder="Jelszó">
+        </div>
+        <div class="form-group">
+          <label for="passwordAgainInput">Jelszó megerősitése</label>
+          <input type="password"
+            class="form-control"
+            id="passwordAgainInput"
+            formControlName="password_confirmation"
+            placeholder="Jelszó újra">
+        </div>
+        <button type="submit" class="btn btn-default">Regisztrálok</button>
+      </form>
+      <div class="text-center reg-button">
+            <span class="d-block w-100 text-center">Van már fiókod?</span><br>
+            <button class="btn btn-default" (click)="openModal('login')">
+              Bejelentkezés
+            </button>
+          </div>
+    </div>
+  </div>
+</div>
